@@ -3,13 +3,9 @@ package com.snlabs.aarogyatelangana.account.utils;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
-import java.util.Map;
-
-import com.snlabs.aarogyatelangana.account.beans.NewUser;
 
 public class AccountUtils {
-	public String md5(String input) {
+	public synchronized String md5(String input) {
 		String md5 = null;
 		if (null == input)
 			return null;

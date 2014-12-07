@@ -19,17 +19,6 @@
 							name="contactNo" id="contactNo" title="contactNo" value="" />
 					</div>
 				</div>
-				<%-- <div class="form-group">
-				                                            <label class="control-label col-md-3 col-lg-3" for="gender">Gender</label>
-				                                            <div class="col-md-6">
-				                                                <label class="radio">
-				                                                    <form:input path="gender" type="radio" name="gender" id="maleRadio" title="male" value="option1" checked/> Male
-				                                                </label>
-				                                                <label class="radio">
-				                                                    <form:input path="gender" type="radio" name="gender" id="femaleRadio" title="female" value="option1" /> Female
-				                                                </label>
-				                                            </div>
-				                                       </div>  --%>
 				<div class="form-group">
 					<label class="control-label col-md-3 col-lg-3">Address</label>
 					<div class="col-md-9">

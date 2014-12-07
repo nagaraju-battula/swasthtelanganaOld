@@ -55,13 +55,28 @@
 				<div class="collapse navbar-collapse" id="navbar-collapse-01">
 					<ul class="nav navbar-nav navbar-left">
 						<li><a href="#"
-							onclick="submitForm('/account/underconstruction.action', 'NO-DATA', 'containerdiv');">Menu
-								Item<span class="navbar-unread">1</span>
+							onclick="submitForm('/account/newpatiententrytab.action', 'NO-DATA', 'lhndiv');">Patient
+								Entry<span class="navbar-unread">1</span>
 						</a></li>
+						<li><a href="#"
+							onclick="submitForm('/account/formftab.action', 'NO-DATA', 'lhndiv');">Form
+								F<span class="navbar-unread">1</span>
+						</a></li>
+						<li><a href="#"
+							onclick="submitForm('/account/userAccounttab.action', 'NO-DATA', 'lhndiv');">Account<span
+								class="navbar-unread">1</span>
+						</a></li>
+						<c:if test="${userDetails.userRole == 'Administrator'}">
+							<li><a href="#"
+								onclick="submitForm('/account/accountmanagementtab.action', 'NO-DATA', 'lhndiv');">Management<span
+									class="navbar-unread">1</span>
+							</a></li>
+						</c:if>
+
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown"
-							onclick="submitForm('/account/underconstruction.action', 'NO-DATA', 'containerdiv');">Messages
-								<b class="caret"></b>
+							onclick="submitForm('/account/underconstruction.action', 'NO-DATA', 'containerdiv');">About
+								Us <b class="caret"></b>
 						</a> <span class="dropdown-arrow"></span>
 							<ul class="dropdown-menu">
 								<li><a href="#">Action</a></li>
@@ -70,9 +85,7 @@
 								<li class="divider"></li>
 								<li><a href="#">Separated link</a></li>
 							</ul></li>
-						<li><a href="#"
-							onclick="submitForm('/account/underconstruction.action', 'NO-DATA', 'containerdiv');">About
-								Us</a></li>
+						<li>
 					</ul>
 					<form class="navbar-form navbar-right" action="#" role="search">
 						<div class="form-group">
@@ -93,95 +106,18 @@
 		</div>
 		<!-- /row -->
 
-		<div class="row demo-samples">
-			<div class="col-xs-4">
-				<div class="todo">
-					<div class="todo-search">
-						<input class="todo-search-field" type="search" value=""
-							placeholder="Search" />
-					</div>
-					<ul>
-						<li class="todo-done">
-							<div class="todo-icon fui-user"></div>
-							<div class="todo-content">
-								<h4 class="todo-name">
-									<a href="#"
-										onclick="submitForm('/account/patiantentry.action', 'NO-DATA', 'containerdiv');"><strong>Patiant
-											Entry</strong></a>
-								</h4>
-								View Patiant Details
-							</div>
-						</li>
-						<li>
-							<div class="todo-icon fui-eye"></div>
-							<div class="todo-content">
-								<h4 class="todo-name">
-									<a href="#"
-										onclick="submitForm('/account/totalfinancereport.action', 'NO-DATA', 'containerdiv');"><strong>Total
-											finance report</strong></a>
-								</h4>
-								With export excel option
-							</div>
-						</li>
-						<li>
-							<div class="todo-icon fui-list"></div>
-							<div class="todo-content">
-								<h4 class="todo-name">
-									<a href="#"
-										onclick="submitForm('/account/formf.action', 'NO-DATA', 'containerdiv');"><strong>Form
-											F</strong></a>
-								</h4>
-								Can search form F
-							</div>
-						</li>
-						<li>
-							<div class="todo-icon fui-eye"></div>
-							<div class="todo-content">
-								<h4 class="todo-name">
-									<a href="#"
-										onclick="submitForm('/account/formfreport.action', 'NO-DATA', 'containerdiv');"><strong>Form
-											F - View</strong></a>
-								</h4>
-								Restricted by the role
-							</div>
-						</li>
-
-						<c:if test="${userDetails.userRole == 'Administrator'}">
-							<li>
-								<div class="todo-icon fui-time"></div>
-								<div class="todo-content">
-									<h4 class="todo-name">
-										<a href="#"
-											onclick="submitForm('/account/accountmanagement.action', 'NO-DATA', 'containerdiv');"><strong>Account
-												management</strong></a>
-									</h4>
-									Can update user passwords
-								</div>
-							</li>
-						</c:if>
-					</ul>
-				</div>
-				<!-- /.todo -->
+		<div class="row demo-samples" >
+			<div class="col-xs-4" id="lhndiv">
+				<%@ include file="patiententrylhn.jsp" %>
 			</div>
-			<!-- /.col-xs-4 -->
-
+			
 			<div class="col-xs-8, col-lg-8 col-md-8">
 				<div id="containerdiv">
 					<div class="login-form">
-						&nbsp;&nbsp; Hi ${userDetails.displayName} (${userDetails.userRole}), Welcome to Swasth telangana.<br />
-						<br/>
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
+						&nbsp;&nbsp; Hi ${userDetails.displayName}
+						(${userDetails.userRole}), Welcome to Swasth telangana.<br /> <br />
+						<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+						<br /> <br /> <br />
 					</div>
 					<br />
 				</div>

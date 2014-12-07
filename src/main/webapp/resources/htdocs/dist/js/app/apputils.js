@@ -43,12 +43,5 @@ $.fn.serializeObject = function () {
 };
 
 function getDomainName(requiredDomain) {
-    return 'http://localhost:8080';
-    /*$.getJSON("/properties/properties.json", function(data) {
-		properties = data;
-	});
-	if(requiredDomain == 'promoadmin'){
-		return properties.handlebarsdomain['loaclhost'];
-	}else if(requiredDomain == 'handlebars'){
-	} */
+	return 'http://'+window.location.host;
 }
