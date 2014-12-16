@@ -45,3 +45,20 @@ $.fn.serializeObject = function () {
 function getDomainName(requiredDomain) {
 	return 'http://'+window.location.host;
 }
+
+function setDefaultDates(){
+	var range = 30;
+	var from = new Date();
+	var to = new Date();
+	var fromDate =  from.getFullYear() + '-' + (from.getMonth() + 1) + '-' + from.getDate();
+	var toDate =  to.getFullYear() + '-' + (to.getMonth() + 1) + '-' + to.getDate();
+	$('#fromDate').val(fromDate);
+	$('#toDate').val(toDate);
+}
+
+function redirectToFormF(){
+	var txt = {vars:"true"};
+	var jo = JSON.parse(txt);
+	alert(jo);
+	processRequest('/account/enterFormDetails.action', jo, 'containerdiv');
+}

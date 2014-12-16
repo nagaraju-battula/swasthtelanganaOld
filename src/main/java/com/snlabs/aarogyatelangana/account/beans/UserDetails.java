@@ -12,8 +12,9 @@ public class UserDetails {
 	public String loginId;
 	public String displayName;
 	public String userRole;
-	public String lastlogin;
 	public String mobileNumber;
+	public String district;
+	public String state;
 	
 	public UserDetails() {
 		// TODO Auto-generated constructor stub
@@ -43,14 +44,6 @@ public class UserDetails {
 		this.userRole = userRole;
 	}
 
-	public String getLastlogin() {
-		return lastlogin;
-	}
-
-	public void setLastlogin(String lastlogin) {
-		this.lastlogin = lastlogin;
-	}
-
 	public String getMobileNumber() {
 		return mobileNumber;
 	}
@@ -58,5 +51,21 @@ public class UserDetails {
 	public void setMobileNumber(String mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
-	
+
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
 }

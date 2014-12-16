@@ -15,8 +15,8 @@ public class AccountServiceImpl implements AccountService{
 	}
 
 	@Override
-	public boolean createAccount(NewUser user) {
-		return accountDao.createAccount(user);
+	public boolean createAccount(NewUser user, UserDetails userDetails) {
+		return accountDao.createAccount(user, userDetails);
 	}
 
 	@Override

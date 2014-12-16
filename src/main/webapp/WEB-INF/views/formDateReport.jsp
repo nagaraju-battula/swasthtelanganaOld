@@ -1,3 +1,9 @@
+<script type="text/javascript">	
+$(document).ready(function() {
+	setDefaultDates();
+});
+</script>
+
 <div class="panel panel-default">
 	<div class="panel-heading">Patient Entry Form</div>
 	<div class="panel-body">
@@ -28,3 +34,4 @@
 		</fieldset>
 	</div>
 </div>
+<div id="searchResultdiv"></div>

@@ -2,11 +2,14 @@ package com.snlabs.aarogyatelangana.account.dao.impl;
 
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.snlabs.aarogyatelangana.account.beans.LoginUser;
 import com.snlabs.aarogyatelangana.account.beans.NewUser;
 import com.snlabs.aarogyatelangana.account.beans.UserDetails;
+import com.snlabs.aarogyatelangana.account.controller.LoginController;
 import com.snlabs.aarogyatelangana.account.dao.AccountDao;
 import com.snlabs.aarogyatelangana.account.utils.UserDetailsRowMapper;
 
@@ -16,6 +19,8 @@ import com.snlabs.aarogyatelangana.account.utils.UserDetailsRowMapper;
  */
 public class AccountDaoImpl implements AccountDao {
 
+	static Logger LOGGER = LoggerFactory.getLogger(AccountDaoImpl.class);
+	
 	private DataSource dataSource;
 
 	public AccountDaoImpl() {
@@ -34,7 +39,26 @@ public class AccountDaoImpl implements AccountDao {
 	public UserDetails getAccountDetails(LoginUser user) {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
-		String query = "SELECT F_LOGIN_ID, F_MOBILE_NUMBER, F_DISPLAY_NAME, F_ROLE FROM T_USER_DETAILS WHERE TRIM(F_LOGIN_ID) = ? AND TRIM(F_PASSWORD) = ?";
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT ");
+		sb.append("DTL.F_LOGIN_ID, ");
+		sb.append("DTL.F_DISPLAY_NAME, ");
+		sb.append("DTL.F_MOBILE_NUMBER, ");
+		sb.append("ADDS.F_DISTRICT, ");
+		sb.append("ADDS.F_STATE, ");
+		sb.append("RLS.F_ROLE ");
+		sb.append("FROM ");
+		sb.append("DEMO.T_USER_DETAILS DTL, ");
+		sb.append("DEMO.T_USER_ADDRESS ADDS, ");
+		sb.append("DEMO.T_USER_ROLES RLS ");
+		sb.append("WHERE ");
+		sb.append("DTL.F_LOGIN_ID = ADDS.F_LOGIN_ID ");
+		sb.append("AND DTL.F_LOGIN_ID = RLS.F_LOGIN_ID ");
+		sb.append("AND DTL.F_IS_ENABLED = 'true' ");
+		sb.append("AND DTL.F_LOGIN_ID = ? ");
+		sb.append("AND DTL.F_PASSWORD = ? ");
+
+		String query = sb.toString();
 
 		Object[] args = new Object[] { user.getUserName(), user.getPassword() };
 
@@ -51,30 +75,34 @@ public class AccountDaoImpl implements AccountDao {
 	}
 
 	@Override
-	public boolean createAccount(NewUser user) {
+	public boolean createAccount(NewUser user, UserDetails userDetails) {
 
-		String query = "INSERT INTO T_USER_DETAILS (F_LOGIN_ID, F_PASSWORD, F_DISPLAY_NAME, F_ROLE, F_CREATION_DATE) VALUES (?,?,?,?, SYSDATE())";
-
-		Object[] args = new Object[] { user.getLoginId(), user.getPassword(),
-				user.getDisplayName(), user.getUserRole() };
-
+		String queryDtl = "INSERT INTO DEMO.T_USER_DETAILS (F_LOGIN_ID, F_PASSWORD, F_IS_ENABLED, F_DISPLAY_NAME, F_MOBILE_NUMBER, F_CREATED_BY, F_CREATION_DATE) VALUES (?, ?, ?, ?, ?, ?, SYSDATE())";
+		Object[] argsDtl = new Object[] { user.getLoginId(), user.getPassword(), new String("true"),
+				user.getDisplayName(), user.getMobileNumber(), userDetails.getLoginId() };
+		
+		String queryAddress = "INSERT INTO DEMO.T_USER_ADDRESS(F_LOGIN_ID,F_DISTRICT,F_STATE)VALUES(?,?,?)";
+		Object[] argsAddress = new Object[] { user.getLoginId(), user.getDistrict(), user.getState()};
+		
+		String queryRole = "INSERT INTO DEMO.T_USER_ROLES(F_LOGIN_ID,F_ROLE)VALUES(?,?)";
+		Object[] argsRole = new Object[] { user.getLoginId(), user.getUserRole()};
+		
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-
+		
 		try {
-			int out = jdbcTemplate.update(query, args);
+			int outDtl = jdbcTemplate.update(queryDtl, argsDtl);
+			int outAddress = jdbcTemplate.update(queryAddress, argsAddress);
+			int outRole = jdbcTemplate.update(queryRole, argsRole);
 
-			if (out != 0) {
-				System.out
-						.println("Account saved with id=" + user.getLoginId());
+			if (outDtl != 0 && outAddress != 0 && outRole != 0) {
+				LOGGER.info("Account saved with id=" + user.getLoginId());
 				return true;
 			} else {
-				System.out.println("Account save failed with id="
-						+ user.getLoginId());
+				LOGGER.info("Account save failed with id = "+ user.getLoginId());
 				return false;
 			}
 		} catch (Exception e) {
-			System.out.println("Account save failed with  exception id="
-					+ user.getLoginId());
+			LOGGER.info("Account save failed with  exception id = "+ user.getLoginId());
 			return false;
 		}
 
@@ -83,7 +111,7 @@ public class AccountDaoImpl implements AccountDao {
 	@Override
 	public boolean updateAccount(NewUser user) {
 		// TODO Auto-generated method stub
-		String query = "UPDATE T_USER_DETAILS SET F_PASSWORD = ? WHERE F_LOGIN_ID = ?";
+		String query = "UPDATE DEMO.T_USER_DETAILS SET F_PASSWORD = ? WHERE F_LOGIN_ID = ?";
 
 		Object[] args = new Object[] { user.getPassword(), user.getLoginId() };
 
@@ -92,16 +120,14 @@ public class AccountDaoImpl implements AccountDao {
 		int out = jdbcTemplate.update(query, args);
 
 		if (out != 0) {
-			System.out.println("Existing account saved with id="
+			LOGGER.info("Existing account saved with id="
 					+ user.getLoginId());
 			return true;
 		} else {
-			System.out.println("Existing account save failed with id="
+			LOGGER.info("Existing account save failed with id="
 					+ user.getLoginId());
 			return false;
 		}
 	}
-	
-	
 
 }

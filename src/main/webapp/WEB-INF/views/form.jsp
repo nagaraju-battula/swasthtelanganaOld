@@ -15,7 +15,7 @@
 					<label class="control-label col-md-3 col-lg-3" for="patientName">Patient Name </label>						
 					<div class="col-md-9 col-lg-9">
 						<input class="form-control" for="patientName" type="text"
-							name="patientName" id="patientName"/>
+							name="patientName" id="patientName" value="${patientName}"/>
 					</div>
 				</div>
 				<div class="form-group">

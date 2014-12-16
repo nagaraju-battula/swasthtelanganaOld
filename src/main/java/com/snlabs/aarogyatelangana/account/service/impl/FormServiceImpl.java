@@ -18,7 +18,7 @@ public class FormServiceImpl implements FormService {
 		//get the FormId for this patient before inserting the form Data to T_FORM Table 
 		try{
 			Patient patientRecord = patientService.searchPatientByName(form.getPatientName());
-			if(patientRecord !=null && patientRecord.getFormId() != null){
+			if(patientRecord != null && patientRecord.getFormId() != null){
 				form.setFormID(Integer.parseInt(patientRecord.getFormId()));
 			}else{
 				System.out.println(" Failed to get the Patient Record for the Given Patient Name");

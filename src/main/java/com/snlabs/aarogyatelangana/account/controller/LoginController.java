@@ -9,6 +9,8 @@ package com.snlabs.aarogyatelangana.account.controller;
  */
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,6 +26,8 @@ import com.snlabs.aarogyatelangana.account.utils.AccountUtils;
 
 @Controller
 public class LoginController {
+	
+	static Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
 
 	@Autowired
 	public AccountService accountService;
@@ -33,9 +37,15 @@ public class LoginController {
 	@RequestMapping(value = {"loginsubmission.action"} ,method = RequestMethod.POST)
 	public String loginsubmission(@RequestBody LoginUser loginUser, HttpSession session, ModelMap modelMap) {
 		
+		LOGGER.info("loginsubmission-> ", loginUser.userName +":"+session.getId());
+		
+		LOGGER.debug("loginsubmission-> before hash ", loginUser.userName +":"+session.getId());
 		loginUser.setPassword(accountUtils.md5(loginUser.getPassword()));
+		LOGGER.debug("loginsubmission-> After hash", loginUser.userName +":"+session.getId());
 		
 		UserDetails userDetails = accountService.getAccountDetails(loginUser);
+		
+		session.setAttribute("userDetails", userDetails);
 		
 		if(userDetails != null){
 			session.setAttribute("userDetails", userDetails);
@@ -44,15 +54,23 @@ public class LoginController {
 		return "home";
 	}
 	
+	@RequestMapping(value = {"logout.action"} ,method = RequestMethod.POST)
+	public String logout(HttpSession session, ModelMap modelMap) {
+		session.invalidate();
+		return "home";
+	}
+	
 	
 	@RequestMapping(value = {"createaccountsubmission.action"} ,method = RequestMethod.POST)
-	public String createaccountsubmission(@RequestBody NewUser user, ModelMap model) {
+	public String createaccountsubmission(@RequestBody NewUser user, ModelMap model, HttpSession session) {
 		//Show patient entry form, Log the request.
 		
 		String hashedPassword = accountUtils.md5(user.getPassword());
 		user.setPassword(hashedPassword);
 		
-		boolean result = accountService.createAccount(user);
+		UserDetails userDetails = (UserDetails) session.getAttribute("userDetails");
+		
+		boolean result = accountService.createAccount(user, userDetails);
 		
 		String view = null;
 		view = result?"createaccountsubmissionsuccess":"createaccountsubmissionfail";

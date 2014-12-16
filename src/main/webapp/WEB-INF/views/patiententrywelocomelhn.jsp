@@ -1,12 +1,6 @@
-<script type="text/javascript">	
-$(document).ready(function() {
-	submitForm('/account/backtohome.action', 'NO-DATA', 'containerdiv');
-});
-</script>
-
 <div class="todo">
 	<div class="todo-search">
-		<span class="todo-search-field"> Patient entry and Search</span>
+		<span class="todo-search-field"> Select your option</span>
 	</div>
 	<ul>
 		<li>

@@ -33,6 +33,29 @@
 						</select>
 					</div>
 				</div>
+				
+				<div class="form-group">
+					<label class="control-label col-md-3 col-lg-3">Mobile number</label>
+					<div class="col-md-6">
+						<input type="text" class="form-control login-field" value=""
+							name="mobileNumber" id="mobileNumber" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3 col-lg-3">District</label>
+					<div class="col-md-6">
+						<input type="text" class="form-control login-field" value=""
+							name="district" id="district" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3 col-lg-3">State</label>
+					<div class="col-md-6">
+						<input type="text" class="form-control login-field" value=""
+							name="state" id="state" />
+					</div>
+				</div>
+				
 				<div class="form-group">
 					<label class="control-label col-md-3 col-lg-3">Password</label>
 					<div class="col-md-6">

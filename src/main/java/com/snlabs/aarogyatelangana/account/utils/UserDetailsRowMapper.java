@@ -21,9 +21,14 @@ public class UserDetailsRowMapper implements RowMapper
 		UserDetails userDetails = new UserDetails();
 		
 		userDetails.setLoginId(rs.getString("F_LOGIN_ID"));
-		userDetails.setMobileNumber(rs.getString("F_MOBILE_NUMBER"));
 		userDetails.setDisplayName(rs.getString("F_DISPLAY_NAME"));
+		userDetails.setMobileNumber(rs.getString("F_MOBILE_NUMBER"));
+		
+		userDetails.setDistrict(rs.getString("F_DISTRICT"));
+		userDetails.setState(rs.getString("F_STATE"));
+		
 		userDetails.setUserRole(rs.getString("F_ROLE"));
+		
 		return userDetails;
 	}
 }

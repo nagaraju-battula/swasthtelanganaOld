@@ -25,8 +25,8 @@ public class FormDaoImpl implements FormDao {
 				.append("F_GUARDIAN_NAME,").append("F_PATIENT_ADDRESS,")
 				.append("F_REFERRAL_ADDRESS,").append("F_MENSTRUAL_PERIOD,")
 				.append("F_MEDICAL_DISEASE,").append("F_PARENTAL_DIAGNOSIS,")
-				.append("F_GYNA_DETAILS");
-		sb.append(")VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+				.append("F_GYNA_DETAILS, F_CREATED_TIMESTAMP");
+		sb.append(")VALUES(?,?,?,?,?,?,?,?,?,?,?, sysdate())");
 		Object[] args = new Object[] { form.getFormID(),form.getPatientName(), form.getAge(),
 				form.getNoOfChildren(), form.getGuardianName(),
 				form.getPatientAddress(), form.getReferralAddress(),
@@ -107,7 +107,7 @@ public class FormDaoImpl implements FormDao {
 			}
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		return form;
 	}

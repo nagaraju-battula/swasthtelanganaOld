@@ -5,10 +5,10 @@ $(document).ready(function() {
 </script>
 <div class="todo">
 	<div class="todo-search">
-		<span class="todo-search-field"> Select your option</span>
+		<span class="todo-search-field"> Your account details</span>
 	</div>
 	<ul>
-		<li class="todo-done">
+		<li>
 			<div class="todo-icon fui-user"></div>
 			<div class="todo-content">
 				<h4 class="todo-name">

@@ -20,26 +20,31 @@ public class PatientController {
 	public PatientService patientService;
 
 	@RequestMapping(value = { "enterPatientDetails.action" }, method = RequestMethod.POST)
-	public String enterPatientDetails() {
+	public String enterPatientDetails(ModelMap model, HttpSession session) {
+		session.removeAttribute("saveResult");
 		return "patientForm";
 	}
-
+	
 	@RequestMapping(value = { "savePatientDetails.action" }, method = RequestMethod.POST)
 	public String savePatientDetails(@RequestBody Patient patient, HttpSession session,
 			ModelMap model) {
+		String view = "patientForm";
 		int patientId = patientService.createPatientRecord(patient);
 		try{
-			if(patientId>0){
+			if(patientId > 0){
 				session.setAttribute("saveResult", "Well done! You successfully saved the Patient Form."+
 						"Keep this Patient Id for future Reference:"+ patientId);
+				session.setAttribute("patientName",patient.getPatientName());
+				//Redirect the form to formF page when patient entry it successful.
+				view = "form";
 			}else{
-				session.setAttribute("saveResult", "Oh snap! Failed Please check the whether you Entered Details Correctly or not.");
+				model.put("saveResult", "Oh snap! Failed Please check the whether you Entered Details Correctly or not.");
 			}
 			
 		}catch(Exception e){
 			e.printStackTrace();
 		}		
-		return "patientForm";
+		return view;
 	}
 
 	public PatientService getPatientService() {

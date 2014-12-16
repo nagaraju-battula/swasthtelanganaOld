@@ -92,7 +92,7 @@
 							<div class="input-group">
 								<span>
 									<button type="submit" class="btn"
-										onclick="submitForm('/account/home.action', 'NO-DATA', 'canvas');">
+										onclick="submitForm('/account/logout.action', 'NO-DATA', 'canvas');">
 										<span>Log out ${userDetails.displayName} </span>
 									</button>
 								</span>
@@ -108,7 +108,7 @@
 
 		<div class="row demo-samples" >
 			<div class="col-xs-4" id="lhndiv">
-				<%@ include file="patiententrylhn.jsp" %>
+				<%@ include file="patiententrywelocomelhn.jsp" %>
 			</div>
 			
 			<div class="col-xs-8, col-lg-8 col-md-8">

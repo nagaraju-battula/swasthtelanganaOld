@@ -6,7 +6,7 @@ pageEncoding="ISO-8859-1"%>
   <head>
     <meta charset="utf-8">
     
-    <title>Aarogya telangana home</title>
+    <title>Swasth telangana home</title>
     <meta name="description" content="Flat UI Kit Free is a Twitter Bootstrap Framework design and Theme, this responsive framework includes a PSD and HTML version."/>
 
     <meta name="viewport" content="width=1000, initial-scale=1.0, maximum-scale=1.0">
@@ -21,14 +21,14 @@ pageEncoding="ISO-8859-1"%>
     <link href="<%=request.getContextPath()%>/resources/dist/css/flat-ui.css" rel="stylesheet">
     <link href="<%=request.getContextPath()%>/resources/docs/assets/css/demo.css" rel="stylesheet">
 
-    <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="shortcut icon" href="<%=request.getContextPath()%>/resources/img/login/icon.png">
     
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../../favicon.ico">
+    <link rel="icon" href="<%=request.getContextPath()%>/resources/img/login/icon.png">
  
   </head>
 
@@ -41,7 +41,7 @@ pageEncoding="ISO-8859-1"%>
 			<div class="login-screen">
 			  <div class="login-icon">
 				<img src="<%=request.getContextPath()%>/resources/img/login/icon.png" alt="Welcome to Mail App" />
-				<h4>Welcome to <small>Aarogya Telangana</small></h4>
+				<h4>Welcome to <small>Swasth Telangana</small></h4>
 			  </div>
 			  <div class="login-form">
 			  <form name="loginform" id="loginform" commandName="loginUser" enctype="multipart/form-data" method="POST">

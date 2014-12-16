@@ -19,3 +19,4 @@
 		</fieldset>
 	</div>
 </div>
+<div id="searchResultdiv"></div>

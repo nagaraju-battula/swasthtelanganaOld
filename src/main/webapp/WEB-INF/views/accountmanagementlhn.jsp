@@ -8,7 +8,7 @@ $(document).ready(function() {
 		<span class="todo-search-field"> Account Management</span>
 	</div>
 	<ul>
-		<li class="todo-done">
+		<li>
 			<div class="todo-icon fui-user"></div>
 			<div class="todo-content">
 				<h4 class="todo-name">

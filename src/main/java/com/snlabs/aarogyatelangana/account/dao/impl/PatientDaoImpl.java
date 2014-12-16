@@ -17,11 +17,11 @@ public class PatientDaoImpl implements PatientDao {
 	
 	@Override
 	public int save(Patient patient) {
-		String insertPatientQuery = "Insert into demo.t_patient(F_PATIENT_ID,F_FORM_ID,F_PATIENT_NAME,"
+		String insertPatientQuery = "INSERT INTO DEMO.T_PATIENT(F_PATIENT_ID,F_FORM_ID,F_PATIENT_NAME,"
 				+ "F_PATIENT_ADDRESS,"
 				+ "F_PRICE,"
 				+ "F_DISCOUNT,"
-				+ "F_NETAMOUNT) " + "VALUES" + "(?,?,?,?,?,?,?)";
+				+ "F_NETAMOUNT, F_CREATED_TIMESTAMP) " + "VALUES" + "(?,?,?,?,?,?,?, SYSDATE())";
 		Object[] args = { patient.getPatientId(),patient.getFormId(),patient.getPatientName(),
 				patient.getPatientAddress(), patient.getPrice(),
 				patient.getDiscount(), patient.getNetAmount() };

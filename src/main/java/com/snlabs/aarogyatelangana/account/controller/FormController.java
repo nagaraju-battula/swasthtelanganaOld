@@ -19,8 +19,12 @@ public class FormController {
 	public FormService formService;
 
 	@RequestMapping(value = { "enterFormDetails.action" }, method = RequestMethod.POST)
-	public String enterFormDetails(HttpSession session) {
-		session.setAttribute("saveResult", null);
+	public String enterFormDetails(String isRedirect, HttpSession session, ModelMap model) {
+		if(!"true".equals(isRedirect)){
+			session.removeAttribute("patientName");
+			session.removeAttribute("isSaveSuccessFull");
+		}
+		session.removeAttribute("saveResult");
 		return "form";
 	}
 
@@ -30,10 +34,10 @@ public class FormController {
 		int formId = formService.createForm(form);
 		try{
 			if(formId >0){
-				session.setAttribute("saveResult", "Well done! You successfully saved the Form Details."+
+				model.put("saveResult", "Well done! You successfully saved the Form Details."+
 							"Keep this Form Id for future Reference:"+ formId);
 			}else{
-				session.setAttribute("saveResult", "Oh snap! Failed Please check the whether you created Patient Form for this Patient Name.");
+				model.put("saveResult", "Oh snap! Failed Please check the whether you created Patient Form for this Patient Name.");
 			}		  	
 		}catch(Exception e){
 			e.printStackTrace();
