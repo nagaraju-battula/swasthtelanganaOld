@@ -4,3 +4,17 @@
 /bin/
 # Ignore
 *~
+#Ignore class files
+*.class
+#Ignore Zip Files
+*.zip
+#ignore settings
+.settings
+#Ignore classpath
+*.classpath
+#Ignore classpath
+*.txt
+#ignore project files
+*.project
+#ignore project files
+*.component

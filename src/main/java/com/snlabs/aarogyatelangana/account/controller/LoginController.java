@@ -58,6 +58,7 @@ public class LoginController {
 	public String logout(HttpSession session, ModelMap modelMap) {
 		session.invalidate();
 		return "home";
+		
 	}
 	
 	
